@@ -92,11 +92,8 @@
   max-width: 100% !important;
 }
 
-/* Streamlit adds a gap between column elements — reduce it in the nav row */
-[data-testid="stHorizontalBlock"] {
-  gap: 0 !important;
-  align-items: center !important;
-}
+/* stHorizontalBlock gap is only overridden inside .pp-nav-wrap — see section 8.
+   Do NOT add a global gap override here; it would break all st.columns() layouts. */
 
 
 /* --------------------------------------------------------------------------
@@ -138,13 +135,12 @@ html, body {
   letter-spacing: -0.01em;
 }
 
-/* Body text inside our containers */
+/* Body text inside our containers — no max-width here; let content control its own line length */
 [data-testid="stMarkdownContainer"] p {
   font-family: var(--font-sans) !important;
   font-size: var(--text-base) !important;
   color: var(--color-text) !important;
   line-height: 1.6;
-  max-width: 68ch;
 }
 
 
@@ -482,5 +478,383 @@ html, body {
   *, *::before, *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================================
+   PHASE 2 — HOME PAGE
+   All selectors namespaced .pp-*
+   No Phase 1 selectors modified below this line.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   H2-1. Hero — Phase 2 additions
+   (base .pp-hero classes already defined in Phase 1)
+   -------------------------------------------------------------------------- */
+
+/* Scroll cue beneath hero body */
+.pp-hero__cue {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-xs) !important;
+  color: var(--color-text-secondary) !important;
+  letter-spacing: 0.06em;
+  margin-top: var(--sp-7);
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   H2-2. Section anchor labels
+   Used as intro labels above section headings: "Selected Work", "Right Now"
+   -------------------------------------------------------------------------- */
+.pp-section-label {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-xs) !important;
+  font-weight: 500;
+  color: var(--color-accent) !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: var(--sp-3);
+}
+
+.pp-section-title {
+  font-family: var(--font-sans) !important;
+  font-size: var(--text-2xl) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--color-text) !important;
+  margin: 0 0 var(--sp-6) 0;
+}
+
+/* --------------------------------------------------------------------------
+   H2-3. Project feature entries
+   Three layouts: JARVIS (text-left), SERC (text-right), FRC (stacked wide)
+   The layout is controlled by st.columns in Python — CSS handles
+   typography, spacing, and the media placeholder within each column.
+   -------------------------------------------------------------------------- */
+
+/* Outer wrapper for each project entry */
+.pp-project {
+  padding: var(--sp-7) 0;
+  border-top: 1px solid var(--color-rule);
+}
+
+.pp-project:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+/* Project index + title row */
+.pp-project__index {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-xs) !important;
+  font-weight: 500;
+  color: var(--color-text-secondary) !important;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: var(--sp-2);
+}
+
+.pp-project__title {
+  font-family: var(--font-sans) !important;
+  font-size: var(--text-xl) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--color-text) !important;
+  margin: 0 0 var(--sp-3) 0;
+}
+
+/* JARVIS — larger display title */
+.pp-project--jarvis .pp-project__title {
+  font-size: var(--text-2xl) !important;
+}
+
+/* Metadata line (mono, muted) */
+.pp-project__meta {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-xs) !important;
+  color: var(--color-text-secondary) !important;
+  letter-spacing: 0.04em;
+  display: block;
+  margin-bottom: var(--sp-5);
+}
+
+/* Status tag inline with meta */
+.pp-project__status {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-xs) !important;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 2px;
+  display: inline-block;
+  margin-left: var(--sp-2);
+}
+
+.pp-project__status--on-hold {
+  color: var(--color-text-secondary) !important;
+  background-color: var(--color-surface) !important;
+}
+
+.pp-project__status--completed {
+  color: var(--color-accent) !important;
+  background-color: color-mix(in srgb, var(--color-accent) 10%, var(--color-bg)) !important;
+}
+
+.pp-project__status--ongoing {
+  color: var(--color-text-secondary) !important;
+  background-color: var(--color-surface) !important;
+}
+
+/* Body paragraphs */
+.pp-project__body p {
+  font-family: var(--font-sans) !important;
+  font-size: var(--text-base) !important;
+  color: var(--color-text) !important;
+  line-height: 1.65;
+  max-width: 56ch;
+  margin-bottom: var(--sp-3);
+}
+
+.pp-project__body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Tech stack line */
+.pp-project__tech {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-xs) !important;
+  color: var(--color-text-secondary) !important;
+  letter-spacing: 0.04em;
+  margin-top: var(--sp-5);
+  display: block;
+}
+
+/* CTA link */
+.pp-project__cta {
+  display: inline-block;
+  margin-top: var(--sp-5);
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-sm) !important;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--color-accent) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid var(--color-accent) !important;
+  padding-bottom: 1px;
+  transition: color 150ms ease-out, border-color 150ms ease-out;
+}
+
+.pp-project__cta:hover {
+  color: var(--color-accent-hover) !important;
+  border-color: var(--color-accent-hover) !important;
+}
+
+/* CTA rendered as non-interactive placeholder (Phase 4 not built yet) */
+.pp-project__cta--pending {
+  color: var(--color-text-secondary) !important;
+  border-color: var(--color-rule) !important;
+  cursor: default;
+}
+
+.pp-project__cta--pending:hover {
+  color: var(--color-text-secondary) !important;
+  border-color: var(--color-rule) !important;
+}
+
+/* --------------------------------------------------------------------------
+   H2-4. Media placeholder
+   Clearly labeled block standing in for real photography / screenshots.
+   Aspect ratios controlled by modifier classes.
+   -------------------------------------------------------------------------- */
+.pp-media-placeholder {
+  width: 100%;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-rule);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-6);
+  gap: var(--sp-2);
+}
+
+/* 4:3 — default for JARVIS and SERC */
+.pp-media-placeholder--4-3 {
+  aspect-ratio: 4 / 3;
+}
+
+/* 16:9 — wide format for FRC */
+.pp-media-placeholder--16-9 {
+  aspect-ratio: 16 / 9;
+}
+
+/* Square — optional */
+.pp-media-placeholder--square {
+  aspect-ratio: 1 / 1;
+}
+
+.pp-media-placeholder__label {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-xs) !important;
+  font-weight: 500;
+  color: var(--color-text-secondary) !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.6;
+  white-space: pre-line;  /* preserves \n in label strings */
+}
+
+/* --------------------------------------------------------------------------
+   H2-5. Right Now section — editorial index list
+   Not cards. Typography + thin rule + spacing.
+   -------------------------------------------------------------------------- */
+.pp-now {
+  padding: var(--sp-8) 0;
+}
+
+.pp-now__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pp-now__item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-5);
+  padding: var(--sp-4) 0;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.pp-now__item:first-child {
+  border-top: 1px solid var(--color-rule);
+}
+
+.pp-now__category {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-xs) !important;
+  font-weight: 500;
+  color: var(--color-accent) !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  width: 140px;  /* fixed column for alignment */
+}
+
+.pp-now__text {
+  font-family: var(--font-sans) !important;
+  font-size: var(--text-base) !important;
+  color: var(--color-text) !important;
+  line-height: 1.5;
+}
+
+/* "December." gets a touch more visual weight */
+.pp-now__text--highlight {
+  font-size: var(--text-md) !important;
+  font-weight: 500;
+  color: var(--color-text) !important;
+}
+
+.pp-now__subtext {
+  font-family: var(--font-sans) !important;
+  font-size: var(--text-sm) !important;
+  color: var(--color-text-secondary) !important;
+  line-height: 1.5;
+  display: block;
+  margin-top: var(--sp-1);
+}
+
+/* --------------------------------------------------------------------------
+   H2-6. Away from the computer / About preview
+   -------------------------------------------------------------------------- */
+.pp-about-preview {
+  padding: var(--sp-8) 0;
+  border-top: 1px solid var(--color-rule);
+}
+
+.pp-about-preview__body p {
+  font-family: var(--font-sans) !important;
+  font-size: var(--text-base) !important;
+  color: var(--color-text) !important;
+  line-height: 1.7;
+  max-width: 60ch;
+  margin-bottom: var(--sp-4);
+}
+
+.pp-about-preview__body p:last-child {
+  margin-bottom: 0;
+}
+
+/* About page CTA — text link, not a button */
+.pp-about-preview__cta {
+  display: inline-block;
+  margin-top: var(--sp-5);
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-sm) !important;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--color-accent) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid var(--color-accent) !important;
+  padding-bottom: 1px;
+  transition: color 150ms ease-out, border-color 150ms ease-out;
+}
+
+.pp-about-preview__cta:hover {
+  color: var(--color-accent-hover) !important;
+  border-color: var(--color-accent-hover) !important;
+}
+
+/* st.page_link inside the about CTA wrapper — override mono/uppercase from nav styles */
+.pp-about-preview__cta-wrap [data-testid="stPageLink"] a,
+.pp-about-preview__cta-wrap [data-testid="stPageLink"] a:visited {
+  font-family: var(--font-sans) !important;
+  font-size: var(--text-base) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  color: var(--color-accent) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid var(--color-accent) !important;
+  padding-bottom: 1px;
+}
+
+.pp-about-preview__cta-wrap [data-testid="stPageLink"] a:hover {
+  color: var(--color-accent-hover) !important;
+  border-color: var(--color-accent-hover) !important;
+}
+
+/* --------------------------------------------------------------------------
+   H2-7. Phase 2 responsive additions
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .pp-project__title {
+    font-size: var(--text-xl) !important;
+  }
+
+  .pp-project--jarvis .pp-project__title {
+    font-size: var(--text-xl) !important;
+  }
+
+  .pp-project__body p {
+    max-width: 100%;
+  }
+
+  .pp-now__item {
+    flex-direction: column;
+    gap: var(--sp-2);
+  }
+
+  .pp-now__category {
+    width: auto;
+  }
+
+  .pp-about-preview__body p {
+    max-width: 100%;
   }
 }

@@ -25,8 +25,10 @@ inject_global_css()
 # ---------------------------------------------------------------------------
 # Routing
 # ---------------------------------------------------------------------------
-# url_path must match the hrefs used in components/navigation.py.
-# default=True marks the page rendered at the root URL ("/").
+# st.Page registers each view at its url_path.
+# st.navigation with position="hidden" suppresses Streamlit's built-in
+# sidebar nav — our custom nav bar in components/navigation.py takes over.
+# default=True on home_page means "/" renders the Home view.
 # ---------------------------------------------------------------------------
 
 home_page  = st.Page("views/home.py",  title="Home",  url_path="home",  default=True)

@@ -1,0 +1,26 @@
+# .streamlit/config.toml
+# ---------------------------------------------------------------------------
+# Streamlit configuration for Parthiv Patel's portfolio.
+#
+# The theme section sets the base rendering colors so that the initial
+# document render matches our design palette before custom CSS is applied.
+# This eliminates the flash of Streamlit's default blue/white theme during
+# page load and navigation.
+#
+# These values must stay in sync with the CSS custom properties in
+# assets/css/style.css.
+# ---------------------------------------------------------------------------
+
+[theme]
+base            = "light"
+backgroundColor         = "#F7F5F2"   # --color-bg: warm off-white
+secondaryBackgroundColor = "#EFEDE9"  # --color-surface
+textColor               = "#1A1816"   # --color-text: near-black
+primaryColor            = "#A0522D"   # --color-accent: sienna
+font                    = "sans serif"
+
+[server]
+headless = true
+
+[browser]
+gatherUsageStats = false
