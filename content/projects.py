@@ -42,8 +42,7 @@ projects = [
         ],
         "tech": "Faster-Whisper / Llama\u00a03 / Ollama / OpenCV / YOLOv8",
         "cta_label": "View JARVIS \u2192",
-        # Phase 4: change to "views/work/jarvis.py" when detail page exists
-        "detail_page": None,
+        "detail_page": "views/work/jarvis.py",
         "media_label": "MEDIA NEEDED\nJARVIS UI / Screenshot",
     },
     {
@@ -66,8 +65,7 @@ projects = [
         ],
         "tech": "ROS\u00a02 Jazzy / Gazebo / Siemens NX / CAD",
         "cta_label": "View SERC \u2192",
-        # Phase 4: change to "views/work/serc.py" when detail page exists
-        "detail_page": None,
+        "detail_page": "views/work/serc.py",
         "media_label": "MEDIA NEEDED\nSimulation Screenshot / Diagram",
     },
     {
@@ -89,8 +87,7 @@ projects = [
         ],
         "tech": "CAD / CNC / Fabrication / Mechanical Assembly",
         "cta_label": "View FRC \u2192",
-        # Phase 4: change to "views/work/frc.py" when detail page exists
-        "detail_page": None,
+        "detail_page": "views/work/frc.py",
         "media_label": "MEDIA NEEDED\nRobot / Build / Competition Photo",
     },
 ]

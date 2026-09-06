@@ -35,8 +35,13 @@ home_page  = st.Page("views/home.py",  title="Home",  url_path="home",  default=
 work_page  = st.Page("views/work.py",  title="Work",  url_path="work")
 about_page = st.Page("views/about.py", title="About", url_path="about")
 
+# Phase 3 — work detail pages
+jarvis_page = st.Page("views/work/jarvis.py", title="JARVIS",         url_path="work/jarvis")
+serc_page   = st.Page("views/work/serc.py",   title="USC SERC / ISI", url_path="work/serc")
+frc_page    = st.Page("views/work/frc.py",    title="FRC",            url_path="work/frc")
+
 pg = st.navigation(
-    [home_page, work_page, about_page],
+    [home_page, work_page, about_page, jarvis_page, serc_page, frc_page],
     position="hidden",   # hides Streamlit's built-in sidebar nav
 )
 

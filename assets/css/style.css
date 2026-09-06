@@ -858,3 +858,306 @@ html, body {
     max-width: 100%;
   }
 }
+
+
+/* ==========================================================================
+   PHASE 3 — WORK INDEX + DETAIL PAGES
+   All selectors namespaced .pp-*
+   No Phase 1 or Phase 2 selectors modified below this line.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   P3-1. Work index — flagship entries
+   -------------------------------------------------------------------------- */
+
+/* Outer wrapper per flagship entry */
+.pp-work-entry {
+  padding: var(--sp-6) 0;
+}
+
+/* Project number — mono, secondary, small */
+.pp-work-entry__number {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-xs) !important;
+  font-weight: 500;
+  color: var(--color-text-secondary) !important;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: var(--sp-2);
+}
+
+/* Title link wrapper — the st.page_link IS the title */
+.pp-work-entry__title-link {
+  display: block;
+  margin-bottom: var(--sp-2);
+}
+
+/* Override global page_link mono/uppercase styles to make title large + display */
+.pp-work-entry__title-link [data-testid="stPageLink"] a,
+.pp-work-entry__title-link [data-testid="stPageLink"] a:visited {
+  font-family: var(--font-sans) !important;
+  font-size: var(--text-xl) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--color-text) !important;
+  text-transform: none !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  background: none !important;
+  padding: 0 !important;
+  transition: color 150ms ease-out;
+}
+
+.pp-work-entry__title-link [data-testid="stPageLink"] a:hover {
+  color: var(--color-accent) !important;
+  text-decoration: none !important;
+}
+
+/* Status tag */
+.pp-work-entry__status {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-xs) !important;
+  font-weight: 500;
+  color: var(--color-text-secondary) !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: var(--sp-3);
+}
+
+/* One-sentence description */
+.pp-work-entry__desc {
+  font-family: var(--font-sans) !important;
+  font-size: var(--text-base) !important;
+  color: var(--color-text) !important;
+  line-height: 1.6;
+  max-width: 58ch;
+  margin: 0 0 var(--sp-3) 0;
+}
+
+/* Tech stack line */
+.pp-work-entry__tech {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-xs) !important;
+  color: var(--color-text-secondary) !important;
+  letter-spacing: 0.04em;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   P3-2. Work index — supporting entry (CS Club)
+   -------------------------------------------------------------------------- */
+.pp-work-supporting {
+  padding: var(--sp-5) 0;
+}
+
+.pp-work-supporting__title {
+  font-family: var(--font-sans) !important;
+  font-size: var(--text-md) !important;
+  font-weight: 600 !important;
+  color: var(--color-text) !important;
+  display: block;
+  margin-bottom: var(--sp-2);
+}
+
+.pp-work-supporting__body p {
+  font-family: var(--font-sans) !important;
+  font-size: var(--text-base) !important;
+  color: var(--color-text-secondary) !important;
+  line-height: 1.65;
+  max-width: 58ch;
+  margin: 0 0 var(--sp-2) 0;
+}
+
+.pp-work-supporting__body p:last-child {
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   P3-3. Work index — "More as it happens." line
+   -------------------------------------------------------------------------- */
+.pp-work-more {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-xs) !important;
+  color: var(--color-text-secondary) !important;
+  letter-spacing: 0.06em;
+  margin-top: var(--sp-6);
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   P3-4. Detail page header
+   -------------------------------------------------------------------------- */
+.pp-detail-header {
+  padding: var(--sp-7) 0 var(--sp-6) 0;
+  border-bottom: 1px solid var(--color-rule);
+  margin-bottom: var(--sp-7);
+}
+
+/* Back link wrapper — above the header block */
+.pp-detail-header__back {
+  padding-top: var(--sp-5);
+  margin-bottom: var(--sp-5);
+  display: block;
+}
+
+/* Override page_link inside back wrapper: mono, xs, uppercase, secondary */
+.pp-detail-header__back [data-testid="stPageLink"] a,
+.pp-detail-header__back [data-testid="stPageLink"] a:visited {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-xs) !important;
+  font-weight: 500;
+  color: var(--color-text-secondary) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  transition: color 150ms ease-out;
+}
+
+.pp-detail-header__back [data-testid="stPageLink"] a:hover {
+  color: var(--color-text) !important;
+}
+
+/* Folio label */
+.pp-detail-header__folio {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-xs) !important;
+  font-weight: 500;
+  color: var(--color-accent) !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: var(--sp-3);
+}
+
+/* Title */
+.pp-detail-header__title {
+  font-family: var(--font-sans) !important;
+  font-size: var(--text-2xl) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--color-text) !important;
+  margin: 0 0 var(--sp-3) 0;
+}
+
+/* Meta line (dates, duration, status) */
+.pp-detail-header__meta {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-xs) !important;
+  color: var(--color-text-secondary) !important;
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: var(--sp-2);
+}
+
+/* Tech stack */
+.pp-detail-header__tech {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-xs) !important;
+  color: var(--color-text-secondary) !important;
+  letter-spacing: 0.04em;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   P3-5. Detail page sections
+   -------------------------------------------------------------------------- */
+.pp-detail-section {
+  padding: var(--sp-6) 0;
+  border-top: 1px solid var(--color-rule);
+}
+
+.pp-detail-section:first-of-type {
+  border-top: none;
+}
+
+/* Section label — mono, small, sienna */
+.pp-detail-section__label {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-xs) !important;
+  font-weight: 500;
+  color: var(--color-accent) !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: var(--sp-4);
+}
+
+/* Prose paragraphs */
+.pp-detail-section__body p {
+  font-family: var(--font-sans) !important;
+  font-size: var(--text-base) !important;
+  color: var(--color-text) !important;
+  line-height: 1.7;
+  max-width: 62ch;
+  margin-bottom: var(--sp-4);
+}
+
+.pp-detail-section__body p:last-child {
+  margin-bottom: var(--sp-5);
+}
+
+/* --------------------------------------------------------------------------
+   P3-6. Detail page — bottom back link
+   -------------------------------------------------------------------------- */
+.pp-detail-back {
+  padding: var(--sp-7) 0 var(--sp-5) 0;
+  border-top: 1px solid var(--color-rule);
+  display: block;
+}
+
+/* Same style as header back link */
+.pp-detail-back [data-testid="stPageLink"] a,
+.pp-detail-back [data-testid="stPageLink"] a:visited {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-xs) !important;
+  font-weight: 500;
+  color: var(--color-text-secondary) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  transition: color 150ms ease-out;
+}
+
+.pp-detail-back [data-testid="stPageLink"] a:hover {
+  color: var(--color-text) !important;
+}
+
+/* --------------------------------------------------------------------------
+   P3-7. Phase 3 responsive rules
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .pp-work-entry__title-link [data-testid="stPageLink"] a {
+    font-size: var(--text-lg) !important;
+  }
+
+  .pp-work-entry__desc {
+    max-width: 100%;
+  }
+
+  .pp-work-supporting__body p {
+    max-width: 100%;
+  }
+
+  .pp-detail-header__title {
+    font-size: var(--text-xl) !important;
+  }
+
+  .pp-detail-section__body p {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .pp-work-entry__title-link [data-testid="stPageLink"] a {
+    font-size: var(--text-md) !important;
+  }
+
+  .pp-detail-header__title {
+    font-size: var(--text-xl) !important;
+  }
+}
