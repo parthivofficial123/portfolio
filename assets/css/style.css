@@ -1,0 +1,462 @@
+/* ==========================================================================
+   Parthiv Patel — Portfolio
+   Global Stylesheet
+   Phase 1: Shell, typography, color tokens, layout, chrome cleanup
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Google Fonts Import
+   -------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Code+Pro:wght@400;500&display=swap');
+
+/* --------------------------------------------------------------------------
+   2. CSS Custom Properties (Design Tokens)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Color — light palette */
+  --color-bg:               #F7F5F2;   /* warm off-white */
+  --color-surface:          #EFEDE9;   /* slightly deeper warm neutral, for subtle separation */
+  --color-text:             #1A1816;   /* near-black, warm tint */
+  --color-text-secondary:   #6B6560;   /* muted mid-tone, secondary labels */
+  --color-accent:           #A0522D;   /* sienna — earthy, warm, unambiguous */
+  --color-accent-hover:     #7A3E21;   /* darker sienna for hover/focus */
+  --color-rule:             #D8D3CC;   /* thin dividers */
+  --color-code-bg:          #EDEBE7;   /* code/mono block backgrounds */
+
+  /* Typography */
+  --font-sans:   'Instrument Sans', system-ui, sans-serif;
+  --font-mono:   'Source Code Pro', 'Courier New', monospace;
+
+  /* Type scale (1.25 modular) anchored at 17px */
+  --text-xs:   0.75rem;    /* 12px  — fine print, micro labels */
+  --text-sm:   0.875rem;   /* 14px  — small metadata, captions */
+  --text-base: 1.0625rem;  /* 17px  — body */
+  --text-md:   1.1875rem;  /* 19px  — lead / intro */
+  --text-lg:   1.375rem;   /* 22px  — section subheads */
+  --text-xl:   1.75rem;    /* 28px  — section heads */
+  --text-2xl:  2.25rem;    /* 36px  — page titles */
+  --text-3xl:  3rem;       /* 48px  — hero display */
+
+  /* Spacing scale (base-8) */
+  --sp-1:   4px;
+  --sp-2:   8px;
+  --sp-3:   12px;
+  --sp-4:   16px;
+  --sp-5:   24px;
+  --sp-6:   32px;
+  --sp-7:   48px;
+  --sp-8:   64px;
+  --sp-9:   96px;
+  --sp-10: 128px;
+
+  /* Layout */
+  --content-width:     780px;   /* max-width for text-heavy sections */
+  --content-wide:     1100px;   /* max-width for wide/media sections */
+}
+
+/* --------------------------------------------------------------------------
+   3. Streamlit Chrome Cleanup
+   Hide sidebar, default header, toolbar, deploy button, and footer.
+   Selectors use data-testid attributes where available (more stable).
+   -------------------------------------------------------------------------- */
+
+/* Hide the sidebar entirely */
+[data-testid="stSidebar"],
+[data-testid="collapsedControl"],
+[data-testid="stSidebarCollapsedControl"] {
+  display: none !important;
+}
+
+/* Hide the top Streamlit toolbar/header */
+[data-testid="stToolbar"],
+[data-testid="stHeader"],
+#stDecoration {
+  display: none !important;
+}
+
+/* Hide the "Deploy" button and Streamlit main menu */
+[data-testid="stMainMenu"],
+[data-testid="baseButton-header"] {
+  display: none !important;
+}
+
+/* Hide the Streamlit footer */
+[data-testid="stFooter"],
+footer {
+  display: none !important;
+}
+
+/* Remove the default top padding Streamlit adds when the header is present */
+[data-testid="stAppViewContainer"] > section:first-child,
+[data-testid="stAppViewBlockContainer"] {
+  padding-top: 0 !important;
+}
+
+/* Main app container — set background */
+[data-testid="stAppViewContainer"] {
+  background-color: var(--color-bg);
+}
+
+[data-testid="block-container"],
+[data-testid="stMainBlockContainer"] {
+  background-color: var(--color-bg);
+}
+
+/* Remove default block container padding so our layout controls it */
+[data-testid="block-container"] {
+  padding: 0 !important;
+  max-width: 100% !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. Base Reset & Body
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent horizontal overflow */
+body, [data-testid="stAppViewContainer"] {
+  overflow-x: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   5. Typography
+   -------------------------------------------------------------------------- */
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.15;
+  margin: 0 0 var(--sp-4) 0;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: var(--text-3xl); font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: var(--text-2xl); font-weight: 600; }
+h3 { font-size: var(--text-xl);  font-weight: 600; }
+h4 { font-size: var(--text-lg);  font-weight: 500; }
+
+p {
+  margin: 0 0 var(--sp-4) 0;
+  max-width: 68ch;
+  color: var(--color-text);
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 150ms ease-out, border-color 150ms ease-out;
+}
+
+a:hover, a:focus-visible {
+  color: var(--color-accent-hover);
+  border-bottom-color: var(--color-accent-hover);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Monospace / metadata */
+code, .mono, .metadata {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  background-color: var(--color-code-bg);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+/* Inline code without background (for metadata labels used in layout) */
+.meta-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   6. Layout Wrappers
+   -------------------------------------------------------------------------- */
+
+/* Page wrapper — constrains max-width and centers content */
+.pp-page {
+  width: 100%;
+  max-width: var(--content-wide);
+  margin: 0 auto;
+  padding: 0 var(--sp-6);
+}
+
+/* Narrow content wrapper — for text-heavy sections */
+.pp-content {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+/* Section spacing */
+.pp-section {
+  padding: var(--sp-8) 0;
+}
+
+.pp-section--sm {
+  padding: var(--sp-6) 0;
+}
+
+/* --------------------------------------------------------------------------
+   7. Navigation
+   -------------------------------------------------------------------------- */
+.pp-nav {
+  width: 100%;
+  border-bottom: 1px solid var(--color-rule);
+  background-color: var(--color-bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.pp-nav__inner {
+  max-width: var(--content-wide);
+  margin: 0 auto;
+  padding: 0 var(--sp-6);
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pp-nav__brand {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  border-bottom: none;
+}
+
+.pp-nav__brand:hover {
+  color: var(--color-accent);
+  border-bottom: none;
+}
+
+.pp-nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-6);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pp-nav__link {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  border-bottom: none;
+  padding: var(--sp-1) 0;
+  transition: color 150ms ease-out;
+  position: relative;
+}
+
+.pp-nav__link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--color-accent);
+  transition: width 150ms ease-out;
+}
+
+.pp-nav__link:hover,
+.pp-nav__link:focus-visible {
+  color: var(--color-text);
+  border-bottom: none;
+}
+
+.pp-nav__link:hover::after,
+.pp-nav__link:focus-visible::after {
+  width: 100%;
+}
+
+.pp-nav__link--active {
+  color: var(--color-text);
+}
+
+.pp-nav__link--active::after {
+  width: 100%;
+  background-color: var(--color-text);
+}
+
+/* --------------------------------------------------------------------------
+   8. Footer
+   -------------------------------------------------------------------------- */
+.pp-footer {
+  border-top: 1px solid var(--color-rule);
+  padding: var(--sp-6) 0;
+  margin-top: var(--sp-9);
+}
+
+.pp-footer__inner {
+  max-width: var(--content-wide);
+  margin: 0 auto;
+  padding: 0 var(--sp-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+}
+
+.pp-footer__name {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.pp-footer__meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  letter-spacing: 0.04em;
+}
+
+/* --------------------------------------------------------------------------
+   9. Dividers
+   -------------------------------------------------------------------------- */
+.pp-rule {
+  border: none;
+  border-top: 1px solid var(--color-rule);
+  margin: var(--sp-7) 0;
+}
+
+/* --------------------------------------------------------------------------
+   10. Page Hero (Phase 1 stub — typography only, no decorative elements)
+   -------------------------------------------------------------------------- */
+.pp-hero {
+  padding: var(--sp-9) 0 var(--sp-7) 0;
+}
+
+.pp-hero__meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-4);
+  display: block;
+}
+
+.pp-hero__title {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  color: var(--color-text);
+  margin: 0 0 var(--sp-5) 0;
+}
+
+.pp-hero__subtitle {
+  font-size: var(--text-md);
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  max-width: 52ch;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   11. Page label (Work, About stubs)
+   -------------------------------------------------------------------------- */
+.pp-page-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--sp-4);
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   12. Responsive — Mobile & Tablet
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  :root {
+    --text-3xl: 2.25rem;   /* 36px on mobile (was 48px) */
+    --text-2xl: 1.75rem;
+    --text-xl:  1.375rem;
+  }
+
+  .pp-page {
+    padding: 0 var(--sp-4);
+  }
+
+  .pp-nav__inner {
+    padding: 0 var(--sp-4);
+    height: 52px;
+  }
+
+  .pp-nav__links {
+    gap: var(--sp-4);
+  }
+
+  .pp-footer__inner {
+    padding: 0 var(--sp-4);
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pp-hero {
+    padding: var(--sp-7) 0 var(--sp-6) 0;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --text-3xl: 1.875rem;  /* 30px on small mobile */
+  }
+
+  .pp-nav__links {
+    gap: var(--sp-3);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   13. Motion — respect prefers-reduced-motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

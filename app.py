@@ -1,19 +1,41 @@
+"""
+app.py
+------
+Application entry point.
+Configures the Streamlit app, injects global CSS, and defines routing
+using st.navigation + st.Page (Streamlit >= 1.36).
+
+The sidebar is hidden via CSS. The custom navigation bar in each view
+provides all top-level routing.
+"""
+
 import streamlit as st
+from components.layout import inject_global_css
 
-st.set_page_config(page_title="Hello World", page_icon="👋")
+st.set_page_config(
+    page_title="Parthiv Patel",
+    page_icon=None,
+    layout="wide",
+    initial_sidebar_state="collapsed",
+    menu_items=None,
+)
 
-st.title("👋 Hello, World!")
-st.write("This is a simple Streamlit app, ready for deployment.")
+inject_global_css()
 
-name = st.text_input("What's your name?", placeholder="Enter your name here")
+# ---------------------------------------------------------------------------
+# Routing
+# ---------------------------------------------------------------------------
+# url_path must match the hrefs used in components/navigation.py.
+# default=True marks the page rendered at the root URL ("/").
+# ---------------------------------------------------------------------------
 
-if name:
-    st.success(f"Hello, {name}! Welcome to Streamlit. 🎉")
+home_page  = st.Page("views/home.py",  title="Home",  url_path="home",  default=True)
+work_page  = st.Page("views/work.py",  title="Work",  url_path="work")
+about_page = st.Page("views/about.py", title="About", url_path="about")
 
-st.divider()
+pg = st.navigation(
+    [home_page, work_page, about_page],
+    position="hidden",   # hides Streamlit's built-in sidebar nav
+)
 
-count = st.slider("Pick a number", 0, 100, 25)
-st.write(f"You picked: **{count}**")
-
-if st.button("Click me!"):
-    st.balloons()
+pg.run()
